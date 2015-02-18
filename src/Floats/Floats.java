@@ -38,8 +38,16 @@ public class Floats {
     }
     
     public Floats addition(Floats fl) {
-        
+        Floats f1 = new Floats (fl.sign, fl.significand, fl.exp);
+        Floats f2;
+        while (! (fl.exp > this.exp)){
+            f1 = new Floats(fl.sign, fl.significand*10, fl.exp--);
+        } 
+        if (f1.significand > this.significand && fl.sign != this.sign){
+            
         }
+        return f1;
+    }
     
     public Floats multiplication(Floats fl){ 
         // this has problems with reduction 
