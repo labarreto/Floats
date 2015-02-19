@@ -31,11 +31,13 @@ public class Floats {
   int sign;
   int exp;
   int significand;
+  
     public Floats(int sign, int significand, int exp){
         this.sign = sign;
         this.exp = exp;
         this.significand = significand;
     }
+    
     
     public Floats addition(Floats fl) {
         Floats f1 = new Floats (fl.sign, fl.significand, fl.exp);
@@ -60,6 +62,20 @@ public class Floats {
        return f;
        
     }
+    
+    Floats reduce(Floats l) {
+        int res = (int) l.significand/10;
+        int exp = (int) l.exp;
+        while (res * 10 == l.significand) {
+            res = l.significand;
+            exp = l.exp--;
+            
+            res = (int) l.significand/10;
+            
+        } 
+        return new Floats(l.sign, res, exp);        
+    }
+    
     
     public static void main(String[] args) {
         // TODO code application logic here
