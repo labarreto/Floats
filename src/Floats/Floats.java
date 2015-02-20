@@ -66,6 +66,8 @@ public class Floats {
         int s = 0;
         int sd = 0;
         int ex;
+//        System.out.println("#0: " + this + " | " + fl);
+        
         if (this.significand == 0) {
             return fl;
         } else if (fl.significand == 0) {
@@ -87,15 +89,21 @@ public class Floats {
             big.significand = big.significand * 10;
         }
         ex = big.exp;
+        
+        // if big.sign 
         if ((big.sign == -1 && small.sign == -1)
                 || (big.sign == 1 && small.sign == 1)) {
             s = big.sign;
             sd = small.significand + big.significand;
+            
         }
+        
+        
         if (big.sign == -1 && small.sign == 1) {
             if (big.significand > small.significand) { // magnitude of significand
                 s = -1;
-                sd = small.significand + big.sign * big.significand;
+                //sd = small.significand + big.sign * big.significand;
+               sd = big.significand + small.significand;
                
             } else if (big.significand < small.significand) {
                 s = 1;
@@ -107,8 +115,8 @@ public class Floats {
         if (big.sign == 1 && small.sign == -1) {
             if (small.significand > big.significand) {
                 s = -1;
-                sd = big.significand + small.sign * small.significand;
-               
+                sd = small.significand + small.sign*big.significand;
+              
             } else if (small.significand < big.significand) {
                 s = 1;
                 sd = big.significand + small.sign * small.significand;
@@ -116,7 +124,7 @@ public class Floats {
             }
 
         }
-        f = new Floats(s, Math.abs(sd), ex);
+        f = new Floats(s, sd, ex);
         f = reduce(f);
         return f;
 
@@ -152,10 +160,10 @@ public class Floats {
         return aux;
     }
 
-    static String stringIt(Floats f) {
-        Integer si = f.sign;
-        Integer sig = f.significand;
-        Integer ex = f.exp;
+    public String toString() {
+        Integer si = this.sign;
+        Integer sig = this.significand;
+        Integer ex = this.exp;
         String signS = si.toString();
         String significandS = sig.toString();
         String exponentS = ex.toString();
@@ -164,24 +172,61 @@ public class Floats {
     }
 
     public static void main(String[] args) {
-        Floats lf = new Floats(1, 325, -2);
-        Floats rf = new Floats(1, 5, -3);
+        // both signs are the same
+        Floats l0 = new Floats(1, 325, -2);
+        Floats r0 = new Floats(1, 5, -3);
         
-        Floats l1 = new Floats(-1, 375, -2);
-        Floats r1 = new Floats(1, 25, -2);
-        Floats l2 = new Floats(-1, 3755, -3);
-        Floats r2 = new Floats(1, 25, -2);
+        Floats l1 = new Floats (-1, 325, -2);
+        Floats r1 = new Floats(-1, 5, -3);
+        
+        // numbers cancel each other out
+        Floats l2 = new Floats (-1, 325, -2);
+        Floats r2 = new Floats (1, 325, -2);
+        
+        // answer should have pos sign
+        Floats l3 = new Floats (1, 325, -2);
+        Floats r3 = new Floats (-1, 5, -1);
+        
+        // answer should have neg sign
+        Floats l4 = new Floats (1, 3255, -3);
+        Floats r4 = new Floats (-1, 345,-2);
+        
+        // answer should have neg sign
+        Floats l5 = new Floats (-1, 325, -2);
+        Floats r5 = new Floats (1,5,-1);
+        
+        // answer should have pos sign
+        Floats l6 = new Floats (-1, 3255, -3);
+        Floats r6 = new Floats (1, 345, -2);
+
+        
+        Floats lx = new Floats(-1, 375, -2);
+        Floats rx = new Floats(1, 25, -2);
+        
+        Floats ly = new Floats(-1, 3755, -3);
+        Floats ry = new Floats(1, 25, -2);
+        
+        
 //        Floats mult = lf.multiplication(rf);
 //        Floats add = lf.addition2(rf);
         
-                Floats mult = l1.multiplication(r1);
-        Floats add = l1.addition2(r1);
+//                Floats mult = l1.multiplication(r1);
+//        Floats add = l1.addition2(r1);
 //        
-//                Floats mult = l2.multiplication(r2);
-//        Floats add = l2.addition2(r2);
+                Floats mult = l2.multiplication(r2);
+        Floats add = l2.addition2(r2);
 
+        System.out.println(l0.addition(r0));
+        System.out.println(l1.addition(r1));
+        System.out.println(l2.addition(r2));
+        System.out.println(l3.addition(r3));
+        System.out.println(l4.addition(r4));
+        System.out.println(l5.addition(r5));
+        System.out.println(l6.addition(r6));
+        System.out.println(lx.addition(rx));
+        System.out.println(ly.addition(ry));
 
-        System.out.println(stringIt(add) + " " + stringIt(mult));
+       // System.out.println(toString(add) + " " + toString(mult));
 
     }
 
