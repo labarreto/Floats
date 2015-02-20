@@ -173,6 +173,7 @@ public class Floats {
 
     public static void main(String[] args) {
         // both signs are the same
+        
         Floats l0 = new Floats(1, 325, -2);
         Floats r0 = new Floats(1, 5, -3);
         
@@ -206,25 +207,19 @@ public class Floats {
         Floats ly = new Floats(-1, 3755, -3);
         Floats ry = new Floats(1, 25, -2);
         
-        
-//        Floats mult = lf.multiplication(rf);
-//        Floats add = lf.addition2(rf);
-        
-//                Floats mult = l1.multiplication(r1);
-//        Floats add = l1.addition2(r1);
-//        
-                Floats mult = l2.multiplication(r2);
+       
+        Floats mult = l2.multiplication(r2);
         Floats add = l2.addition2(r2);
 
-        System.out.println(l0.addition(r0));
-        System.out.println(l1.addition(r1));
-        System.out.println(l2.addition(r2));
-        System.out.println(l3.addition(r3));
-        System.out.println(l4.addition(r4));
-        System.out.println(l5.addition(r5));
-        System.out.println(l6.addition(r6));
-        System.out.println(lx.addition(rx));
-        System.out.println(ly.addition(ry));
+        System.out.println(l0.addition2(r0).toString());
+        System.out.println(l1.addition2(r1).toString());
+        System.out.println(l2.addition2(r2).toString());
+        System.out.println(l3.addition2(r3).toString());
+        System.out.println(l4.addition2(r4).toString());
+        System.out.println(l5.addition2(r5).toString());
+        System.out.println(l6.addition2(r6).toString());
+        System.out.println(lx.addition2(rx).toString());
+        System.out.println(ly.addition2(ry).toString());
 
        // System.out.println(toString(add) + " " + toString(mult));
 
