@@ -32,37 +32,9 @@ public class Floats {
         this.significand = significand;
     }
 
-    public Floats addition(Floats right) {
-        //make exp that's numerical higher match the lower one. 
-        Floats r;
-        Floats l;
-        if (this.significand == 0) {
-            return right;
-        } else if (right.significand == 0) {
-            return this;
-        }
 
-        if (this.exp < right.exp) {
-            r = new Floats(right.sign, right.significand, right.exp);
-            l = new Floats(this.sign, this.significand, this.exp);
-        } else {
-            r = new Floats(this.sign, this.significand, this.exp);
-            l = new Floats(right.sign, right.significand, right.exp);
-        }
-        if (l.sign < 0) {
 
-        }
-        int diff_exp = r.exp - l.exp;
-        l.exp = l.exp - diff_exp;
-        l.significand = l.sign * l.significand + r.sign * r.significand;
-
-        l.sign = (l.significand / l.significand);
-        l.significand = Math.abs(l.significand);
-        // l = reduce(l);
-        return l;
-    }
-
-    public Floats addition2(Floats fl) {
+    public Floats addition(Floats fl) {
         Floats f;
         int s = 0;
         int sd = 0;
@@ -97,11 +69,20 @@ public class Floats {
             big = this;
             small = fl;
         }
+        System.out.println("before loop: " + big + ", " + small);
         if (big.exp != small.exp) {
+            
+            System.out.println("1: " + big + " + " + small);
+            
             for (int i = big.exp - small.exp; i > 0; i--) {
+                
+                System.out.println("2: " + big + " + " + small);
+                
                 big.exp--;
                 big.significand = big.significand * 10;
             }
+            
+            System.out.println("3: " + big + " + " + small);
         }
         ex = big.exp;
 
@@ -122,7 +103,6 @@ public class Floats {
             } else if (big.significand < small.significand) {
                 s = 1;
                 sd = small.significand + big.sign * big.significand;
-
             }
 
         }
@@ -223,15 +203,15 @@ public class Floats {
         Floats ly = new Floats(-1, 3755, -3);
         Floats ry = new Floats(1, 25, -2);
 
-        System.out.println(l0.addition2(r0).toString());
-        System.out.println(l1.addition2(r1).toString());
-        System.out.println(l2.addition2(r2).toString()); //<- this case causes infinite loop
-        System.out.println(l3.addition2(r3).toString());
-        System.out.println(l4.addition2(r4).toString());
-        System.out.println(l5.addition2(r5).toString());
-        System.out.println(l6.addition2(r6).toString());
-        System.out.println(lx.addition2(rx).toString());
-        System.out.println(ly.addition2(ry).toString());
+        System.out.println("Result: " +l0.addition(r0).toString());
+        System.out.println("Result: " +l1.addition(r1).toString());
+        System.out.println("Result: " +l2.addition(r2).toString()); //<- this case causes infinite loop
+        System.out.println(l3.addition(r3).toString());
+        System.out.println(l4.addition(r4).toString());
+        System.out.println(l5.addition(r5).toString());
+        System.out.println(l6.addition(r6).toString());
+        System.out.println(lx.addition(rx).toString());
+        System.out.println(ly.addition(ry).toString());
         System.out.println(l1.addition(zero));
         System.out.println(zero.addition(l1));
 //
