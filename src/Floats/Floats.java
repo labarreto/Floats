@@ -63,8 +63,8 @@ public class Floats {
 
     public Floats addition2(Floats fl) {
         Floats f;
-        int s;
-        int sd;
+        int s = 0;
+        int sd = 0;
         int ex;
         if (this.significand == 0) {
             return fl;
@@ -91,26 +91,33 @@ public class Floats {
                 || (big.sign == 1 && small.sign == 1)) {
             s = big.sign;
             sd = small.significand + big.significand;
-            return new Floats(s, sd, ex);
-        } else if (big.sign == -1 && small.sign == 1) {
+        }
+        if (big.sign == -1 && small.sign == 1) {
             if (big.significand > small.significand) { // magnitude of significand
                 s = -1;
                 sd = small.significand + big.sign * big.significand;
+               
             } else if (big.significand < small.significand) {
                 s = 1;
                 sd = small.significand + big.sign * big.significand;
+              
             }
-            
-        } else if (big.sign == 1 && small.sign == -1) {
+
+        }
+        if (big.sign == 1 && small.sign == -1) {
             if (small.significand > big.significand) {
                 s = -1;
                 sd = big.significand + small.sign * small.significand;
+               
             } else if (small.significand < big.significand) {
                 s = 1;
                 sd = big.significand + small.sign * small.significand;
+                
             }
+
         }
         return new Floats(s, sd, ex);
+
     }
 
     public Floats multiplication(Floats fl) {
@@ -161,7 +168,7 @@ public class Floats {
         Floats lf = new Floats(1, 325, -2);
         Floats rf = new Floats(1, 5, -3);
 
-        Floats add = lf.addition(rf);
+        Floats add = lf.addition2(rf);
 
         Floats mult = lf.multiplication(rf);
 
