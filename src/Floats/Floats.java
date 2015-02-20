@@ -73,13 +73,13 @@ public class Floats {
     }
     
     Floats reduce(Floats l) {
-        int res = (int) l.significand/10;
-        int exp = (int) l.exp;
+        int res =  l.significand/10;
+        int exp =  l.exp;
         while (res * 10 == l.significand) {
             res = l.significand;
             exp = l.exp--;
             
-            res = (int) l.significand/10;
+            res = l.significand/10;
             
         } 
         return new Floats(l.sign, res, exp);        
