@@ -65,8 +65,8 @@ public class Floats {
     public Floats addition2(Floats fl) {
         Floats f;
         int s = 0;
-        int sd = 0 ;
-        int ex;
+        int sd = 0;
+        int ex = 1;
 //        System.out.println("#0: " + this + " | " + fl);
 
         // case where you add 0
@@ -81,29 +81,27 @@ public class Floats {
                 && ((this.sign == -1 && fl.sign == 1) || (this.sign == 1 && fl.sign == -1))) {
             s = 1;
             sd = 0;
-            ex = 1; 
+            
         }
 
-        
-        
         Floats big;
         Floats small;
-        
-        // assigning which number is numerically bigger. depends on exponent. 
 
+        // assigning which number is numerically bigger. depends on exponent. 
         if (fl.exp > this.exp) {
             big = fl;
             small = this;
-        } else { 
+        } else {
             // in the case when the exp are equal, the next for loop
             // will not do anything since big - small = 0. 
             big = this;
             small = fl;
         }
-        
-        for (int i = big.exp - small.exp; i > 0; i--) {
-            big.exp--;
-            big.significand = big.significand * 10;
+        if (big.exp != small.exp) {
+            for (int i = big.exp - small.exp; i > 0; i--) {
+                big.exp--;
+                big.significand = big.significand * 10;
+            }
         }
         ex = big.exp;
 
@@ -216,8 +214,8 @@ public class Floats {
         // answer should have pos sign
         Floats l6 = new Floats(-1, 3255, -3);
         Floats r6 = new Floats(1, 345, -2);
-        
-        Floats zero = new Floats (1, 0, 1);
+
+        Floats zero = new Floats(1, 0, 1);
 
         Floats lx = new Floats(-1, 375, -2);
         Floats rx = new Floats(1, 25, -2);
@@ -227,7 +225,7 @@ public class Floats {
 
         System.out.println(l0.addition2(r0).toString());
         System.out.println(l1.addition2(r1).toString());
-//        System.out.println(l2.addition2(r2).toString()); //<- this case causes infinite loop
+        System.out.println(l2.addition2(r2).toString()); //<- this case causes infinite loop
         System.out.println(l3.addition2(r3).toString());
         System.out.println(l4.addition2(r4).toString());
         System.out.println(l5.addition2(r5).toString());
