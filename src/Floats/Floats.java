@@ -40,17 +40,21 @@ public class Floats {
     public Floats addition(Floats right) {
         Floats r;
         Floats l;
-        
-       
-        
+        if (this.significand == 0) {
+            return right;
+        } else if (right.significand == 0) {
+            return this;
+        }
         if (this.exp < right.exp) {
- r = new Floats (right.sign, right.significand, right.exp);
+            r = new Floats (right.sign, right.significand, right.exp);
             l = new Floats (this.sign, this.significand, this.exp);
         } else {
             r = new Floats (this.sign, this.significand, this.exp);
             l = new Floats (right.sign, right.significand, right.exp);
         }
-        
+        if (l.sign < 0) {
+             
+        }
         int diff_exp = r.exp - l.exp;
         l.exp = l.exp - diff_exp;
         l.significand = l.sign * l.significand + r.sign * r.significand;
@@ -62,13 +66,15 @@ public class Floats {
     }
     
     public Floats multiplication(Floats fl){ 
-        
        Floats f;
+       if (fl.significand == 0 || this.significand == 0) {
+           f = new Floats (1, 0, 1);
+       }
        int si = this.sign * fl.sign;
        int sig = this.significand * fl.significand;
        int ex = this.exp + fl.exp;
        f = new Floats(si, sig, ex);
-       //f = reduce(f);
+       f = reduce(f);
        return f;
        
     }
