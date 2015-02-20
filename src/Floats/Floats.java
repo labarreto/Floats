@@ -77,7 +77,7 @@ public class Floats {
         int ex =  l.exp;
         while (res % 10 == 0) {
             ex = l.exp++;
-            res = l.significand/10;
+            res = res/10;
             
         } 
         return new Floats(l.sign, res, ex);        
