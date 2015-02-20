@@ -74,10 +74,10 @@ public class Floats {
     
     Floats reduce(Floats l) {
         int res =  l.significand/10;
-        int exp =  l.exp;
+        int ex =  l.exp;
         while (res * 10 == l.significand) {
             res = l.significand;
-            exp = l.exp--;
+            ex = l.exp++;
             
             res = l.significand/10;
             
