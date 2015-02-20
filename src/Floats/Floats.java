@@ -52,6 +52,7 @@ public class Floats {
                 && ((this.sign == -1 && fl.sign == 1) || (this.sign == 1 && fl.sign == -1))) {
             s = 1;
             sd = 0;
+            
            
         }
 
@@ -124,7 +125,7 @@ public class Floats {
         int sig = this.significand * fl.significand;
         int ex = this.exp + fl.exp;
         if (this.significand == 0 || fl.significand == 0) {
-            f = new Floats (1, 0, 1);
+            f = new Floats (1, 0, 0);
             return f;
         } else {
             f = new Floats(si, sig, ex);
