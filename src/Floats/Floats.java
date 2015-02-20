@@ -77,9 +77,10 @@ public class Floats {
         int ex =  l.exp;
         while (res % 10 == 0) {
             ex = l.exp++;
-            res = l.significand/10;   
+            res = l.significand/10;
+            
         } 
-        return new Floats(l.sign, res, exp);        
+        return new Floats(l.sign, res, ex);        
     }
     
     int intpower(int base, int exponent) {
@@ -91,7 +92,7 @@ public class Floats {
     }
     
     static String stringIt(Floats f) {
-        Integer si = f.exp;
+        Integer si = f.sign;
         Integer sig = f.significand;
         Integer ex = f.exp;
         String signS = si.toString();
