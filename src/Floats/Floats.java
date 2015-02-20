@@ -6,11 +6,7 @@
 
 package Floats;
 import java.util.*;
-/**
- *
- * @author ldbruby95
- *
- */
+
 //significand is always an integer value
 //example 3.25. sign 1, significand 325, exponent -2
 //sign 1  or -1
@@ -39,20 +35,9 @@ public class Floats {
     }
     
     
-    public Floats addition(Floats fl) {
-        
-        Floats f1 = new Floats (fl.sign, fl.significand, fl.exp);
-        Floats f2;
-        while (! (fl.exp > this.exp)){
-            f1 = new Floats(fl.sign, fl.significand*10, fl.exp--);
-        } 
-        if (f1.significand > this.significand && fl.sign != this.sign){
-            
-        }
-        return f1;
-    }
+
     
-    public Floats addition2(Floats right) {
+    public Floats addition(Floats right) {
         Floats r;
         Floats l;
         
@@ -124,7 +109,7 @@ public class Floats {
         Floats lf = new Floats(1, 325, -2);
         Floats rf = new Floats(1, 5, -3);
         
-        Floats add = lf.addition2(rf);
+        Floats add = lf.addition(rf);
         
         Floats mult = lf.multiplication(rf);
         
