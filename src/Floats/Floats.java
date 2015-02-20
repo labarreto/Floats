@@ -54,7 +54,7 @@ public class Floats {
         l.exp = l.exp - diff_exp;
         l.significand = l.sign * l.significand + r.sign * r.significand;
         
-        l.sign = (int) (l.significand/l.significand);
+        l.sign = (l.significand/l.significand);
         l.significand = Math.abs(l.significand);
         l = reduce(l);
         return l;
