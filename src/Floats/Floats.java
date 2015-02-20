@@ -216,6 +216,8 @@ public class Floats {
         // answer should have pos sign
         Floats l6 = new Floats(-1, 3255, -3);
         Floats r6 = new Floats(1, 345, -2);
+        
+        Floats zero = new Floats (1, 0, 1);
 
         Floats lx = new Floats(-1, 375, -2);
         Floats rx = new Floats(1, 25, -2);
@@ -232,6 +234,8 @@ public class Floats {
         System.out.println(l6.addition2(r6).toString());
         System.out.println(lx.addition2(rx).toString());
         System.out.println(ly.addition2(ry).toString());
+        System.out.println(l1.addition(zero));
+        System.out.println(zero.addition(l1));
 //
 //       // System.out.println(toString(add) + " " + toString(mult));
 
