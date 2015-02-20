@@ -116,15 +116,14 @@ public class Floats {
             }
 
         }
-        return new Floats(s, sd, ex);
+        f = new Floats(s, Math.abs(sd), ex);
+        f = reduce(f);
+        return f;
 
     }
 
     public Floats multiplication(Floats fl) {
         Floats f;
-        if (fl.significand == 0 || this.significand == 0) {
-            f = new Floats(1, 0, 1);
-        }
         int si = this.sign * fl.sign;
         int sig = this.significand * fl.significand;
         int ex = this.exp + fl.exp;
@@ -167,10 +166,20 @@ public class Floats {
     public static void main(String[] args) {
         Floats lf = new Floats(1, 325, -2);
         Floats rf = new Floats(1, 5, -3);
+        
+        Floats l1 = new Floats(-1, 375, -2);
+        Floats r1 = new Floats(1, 25, -2);
+        Floats l2 = new Floats(-1, 3755, -3);
+        Floats r2 = new Floats(1, 25, -2);
+//        Floats mult = lf.multiplication(rf);
+//        Floats add = lf.addition2(rf);
+        
+                Floats mult = l1.multiplication(r1);
+        Floats add = l1.addition2(r1);
+//        
+//                Floats mult = l2.multiplication(r2);
+//        Floats add = l2.addition2(r2);
 
-        Floats add = lf.addition2(rf);
-
-        Floats mult = lf.multiplication(rf);
 
         System.out.println(stringIt(add) + " " + stringIt(mult));
 
