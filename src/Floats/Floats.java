@@ -40,6 +40,7 @@ public class Floats {
     
     
     public Floats addition(Floats fl) {
+        
         Floats f1 = new Floats (fl.sign, fl.significand, fl.exp);
         Floats f2;
         while (! (fl.exp > this.exp)){
@@ -51,14 +52,37 @@ public class Floats {
         return f1;
     }
     
+    public Floats addition2(Floats right) {
+        Floats r;
+        Floats l;
+        
+        r = new Floats (right.sign, right.significand, right.exp);
+        
+        if (this.exp < right.exp) {
+
+            l = new Floats (this.sign, this.significand, this.exp);
+        } else {
+            r = new Floats (this.sign, this.significand, this.exp);
+            l = new Floats (right.sign, right.significand, right.exp);
+        }
+        int diff_exp = r.exp - l.exp;
+        l.exp = l.exp - diff_exp;
+        l.significand = l.sign * l.significand + r.sign * r.significand;
+        
+        l.sign = (int) (l.significand/l.significand);
+        l.significand = Math.abs(l.significand);
+        l = reduce(l);
+        return l;
+    }
+    
     public Floats multiplication(Floats fl){ 
-        // this has problems with reduction 
         
        Floats f;
-       int si = this.sign * this.sign;
+       int si = this.sign * fl.sign;
        int sig = this.significand * fl.significand;
        int ex = this.exp + fl.exp;
        f = new Floats(si, sig, ex);
+       f = reduce(f);
        return f;
        
     }
@@ -76,9 +100,18 @@ public class Floats {
         return new Floats(l.sign, res, exp);        
     }
     
+    int intpower(int base, int exponent) {
+        int aux = 1;
+        for (int i = 0; i < exponent; i++) {
+            aux*=base;
+        }
+        return aux;
+    }
+    
     
     public static void main(String[] args) {
-        // TODO code application logic here
+        Floats lf = new Floats(1, 325, -2);
+        
         
     }
     
