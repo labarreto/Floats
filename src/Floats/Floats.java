@@ -32,17 +32,16 @@ public class Floats {
         this.significand = significand;
     }
 
-
-
     public Floats addition(Floats fl) {
         Floats f;
         int s = 0;
         int sd = 0;
-        int ex = 1;
+        int ex = 0;
 //        System.out.println("#0: " + this + " | " + fl);
 
         // case where you add 0
         if (this.significand == 0) {
+
             return fl;
         } else if (fl.significand == 0) {
             return this;
@@ -53,7 +52,7 @@ public class Floats {
                 && ((this.sign == -1 && fl.sign == 1) || (this.sign == 1 && fl.sign == -1))) {
             s = 1;
             sd = 0;
-            
+           
         }
 
         Floats big;
@@ -69,22 +68,18 @@ public class Floats {
             big = this;
             small = fl;
         }
-        System.out.println("before loop: " + big + ", " + small);
+        System.out.println("Problem: " + big + " + " + small);
         if (big.exp != small.exp) {
-            
-            System.out.println("1: " + big + " + " + small);
-            
+
             for (int i = big.exp - small.exp; i > 0; i--) {
-                
-                System.out.println("2: " + big + " + " + small);
-                
                 big.exp--;
                 big.significand = big.significand * 10;
             }
-            
-            System.out.println("3: " + big + " + " + small);
+
+            System.out.println("#1: " + big + " + " + small);
+            ex = big.exp;
         }
-        ex = big.exp;
+        
 
         // if big.sign 
         if ((big.sign == -1 && small.sign == -1)
@@ -98,7 +93,7 @@ public class Floats {
             if (big.significand > small.significand) { // magnitude of significand
                 s = -1;
                 //sd = small.significand + big.sign * big.significand;
-                sd = big.significand + small.significand;
+                sd = big.significand + big.sign*small.significand;
 
             } else if (big.significand < small.significand) {
                 s = 1;
@@ -119,7 +114,6 @@ public class Floats {
 
         }
         f = new Floats(s, sd, ex);
-        f = reduce(f);
         return f;
 
     }
@@ -129,11 +123,18 @@ public class Floats {
         int si = this.sign * fl.sign;
         int sig = this.significand * fl.significand;
         int ex = this.exp + fl.exp;
-        f = new Floats(si, sig, ex);
-        f = reduce(f);
-        return f;
+        if (this.significand == 0 || fl.significand == 0) {
+            f = new Floats (1, 0, 1);
+            return f;
+        } else {
+            f = new Floats(si, sig, ex);
+            f = reduce(f);
+            return f;
+        }
 
     }
+    
+
 
     Floats reduce(Floats l) {
         int res = l.significand;
@@ -146,13 +147,7 @@ public class Floats {
         return new Floats(l.sign, res, ex);
     }
 
-    int intpower(int base, int exponent) {
-        int aux = 1;
-        for (int i = 0; i < exponent; i++) {
-            aux *= base;
-        }
-        return aux;
-    }
+
 
     public String toString() {
         Integer si = this.sign;
@@ -163,60 +158,6 @@ public class Floats {
         String exponentS = ex.toString();
         String stringIt = "(" + signS + " " + significandS + " " + exponentS + ")";
         return stringIt;
-    }
-
-    public static void main(String[] args) {
-        // both signs are the same
-
-        Floats l0 = new Floats(1, 325, -2);
-        Floats r0 = new Floats(1, 5, -3);
-
-        Floats l1 = new Floats(-1, 325, -2);
-        Floats r1 = new Floats(-1, 5, -3);
-
-        // numbers cancel each other out
-        // this case causes infinite loop!!!!
-        Floats l2 = new Floats(-1, 325, -2);
-        Floats r2 = new Floats(1, 325, -2);
-
-        // answer should have pos sign
-        Floats l3 = new Floats(1, 325, -2);
-        Floats r3 = new Floats(-1, 5, -1);
-
-        // answer should have neg sign
-        Floats l4 = new Floats(1, 3255, -3);
-        Floats r4 = new Floats(-1, 345, -2);
-
-        // answer should have neg sign
-        Floats l5 = new Floats(-1, 325, -2);
-        Floats r5 = new Floats(1, 5, -1);
-
-        // answer should have pos sign
-        Floats l6 = new Floats(-1, 3255, -3);
-        Floats r6 = new Floats(1, 345, -2);
-
-        Floats zero = new Floats(1, 0, 1);
-
-        Floats lx = new Floats(-1, 375, -2);
-        Floats rx = new Floats(1, 25, -2);
-
-        Floats ly = new Floats(-1, 3755, -3);
-        Floats ry = new Floats(1, 25, -2);
-
-        System.out.println("Result: " +l0.addition(r0).toString());
-        System.out.println("Result: " +l1.addition(r1).toString());
-        System.out.println("Result: " +l2.addition(r2).toString()); //<- this case causes infinite loop
-        System.out.println(l3.addition(r3).toString());
-        System.out.println(l4.addition(r4).toString());
-        System.out.println(l5.addition(r5).toString());
-        System.out.println(l6.addition(r6).toString());
-        System.out.println(lx.addition(rx).toString());
-        System.out.println(ly.addition(ry).toString());
-        System.out.println(l1.addition(zero));
-        System.out.println(zero.addition(l1));
-//
-//       // System.out.println(toString(add) + " " + toString(mult));
-
     }
 
 }
