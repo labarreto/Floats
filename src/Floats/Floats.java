@@ -5,7 +5,7 @@
  */
 
 package Floats;
-
+import java.util.*;
 /**
  *
  * @author ldbruby95
@@ -108,10 +108,27 @@ public class Floats {
         return aux;
     }
     
+    static String stringIt(Floats f) {
+        Integer si = f.exp;
+        Integer sig = f.significand;
+        Integer ex = f.exp;
+        String signS = si.toString();
+        String significandS = sig.toString();
+        String exponentS = ex.toString();
+        String stringIt = "(" + signS +" " + significandS + " " + exponentS + ")";
+        return stringIt;
+    }
+    
     
     public static void main(String[] args) {
         Floats lf = new Floats(1, 325, -2);
+        Floats rf = new Floats(1, 5, -3);
         
+        Floats add = lf.addition2(rf);
+        
+        Floats mult = lf.multiplication(rf);
+        
+        System.out.println(stringIt(add) + " " + stringIt(mult));
         
     }
     
