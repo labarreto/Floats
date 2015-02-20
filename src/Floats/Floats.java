@@ -41,22 +41,23 @@ public class Floats {
         Floats r;
         Floats l;
         
-        r = new Floats (right.sign, right.significand, right.exp);
+       
         
         if (this.exp < right.exp) {
-
+ r = new Floats (right.sign, right.significand, right.exp);
             l = new Floats (this.sign, this.significand, this.exp);
         } else {
             r = new Floats (this.sign, this.significand, this.exp);
             l = new Floats (right.sign, right.significand, right.exp);
         }
+        
         int diff_exp = r.exp - l.exp;
         l.exp = l.exp - diff_exp;
         l.significand = l.sign * l.significand + r.sign * r.significand;
         
         l.sign = (l.significand/l.significand);
         l.significand = Math.abs(l.significand);
-        l = reduce(l);
+       // l = reduce(l);
         return l;
     }
     
@@ -67,7 +68,7 @@ public class Floats {
        int sig = this.significand * fl.significand;
        int ex = this.exp + fl.exp;
        f = new Floats(si, sig, ex);
-       f = reduce(f);
+       //f = reduce(f);
        return f;
        
     }
@@ -76,7 +77,7 @@ public class Floats {
         int res =  l.significand;
         int ex =  l.exp;
         while (res % 10 == 0) {
-            ex = l.exp++;
+            ex = l.exp--;
             res = res/10;
             
         } 
